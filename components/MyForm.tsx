@@ -56,11 +56,12 @@ function MyForm({
         {listes?.map((photo, i) => (
           <div
             key={i}
-            className=" h-64 relative group border border-yellow-400 rounded-md"
+            className=" h-64 relative group border border-yellow-400 rounded-md bg-slate-200 overflow-hidden"
           >
             <Image
               fill
               objectFit="cover"
+              sizes="(min-width: 2860px) calc(10vw - 36px), (min-width: 2600px) calc(10.83vw - 32px), (min-width: 2340px) calc(12.5vw - 43px), (min-width: 2080px) calc(14.58vw - 54px), (min-width: 1820px) calc(16.67vw - 54px), (min-width: 1560px) calc(20vw - 63px), (min-width: 1320px) calc(25.45vw - 83px), (min-width: 1060px) calc(33.33vw - 99px), (min-width: 800px) calc(50vw - 144px), (min-width: 560px) calc(100vw - 278px), calc(5vw + 234px)"
               src={photo.urls.regular}
               alt={photo.alt_description}
               className=" group-hover:opacity-70 cursor-pointer"
