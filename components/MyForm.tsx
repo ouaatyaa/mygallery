@@ -67,7 +67,7 @@ function MyForm({
         {/* //Prev page */}
         {page !== 1 && (
           <Link
-            href={`http://localhost:3000/?page=${page - 1}&query=${queryValue}`}
+            href={`/?page=${page - 1}&query=${queryValue}`}
             className=" text-white font-bold"
             onClick={() => {
               setActivePage((prev) => prev - 1);
@@ -84,7 +84,7 @@ function MyForm({
         {/*    //Next page */}
         {page !== total_pages && (
           <Link
-            href={`http://localhost:3000/?page=${page + 1}&query=${queryValue}`}
+            href={`/?page=${page + 1}&query=${queryValue}`}
             className=" text-white font-bold"
             onClick={() => {
               setActivePage((prev) => prev + 1);
