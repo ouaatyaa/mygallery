@@ -3,7 +3,15 @@ import Image from "next/image";
 import Header from "@/components/Header";
 import Imgcontainer from "@/components/Imgcontainer";
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | undefined };
+}) {
+  const page = parseInt(searchParams["page"] || "1");
+  const query = searchParams["query"] ?? "all";
+  const per_page = parseInt(searchParams["per_page"] || "10");
+
   return (
     <main className="grid items-center min-h-screen">
       <div className=" overflow-hidden border-2 border-yellow-300  relative  h-full">
@@ -21,9 +29,9 @@ export default async function Home() {
           />
         </div>
 
-        <div className="px-10  flex flex-col justify-center items-center w-full h-full">
+        <div className="px-10  flex flex-col justify-center items-center  ">
           <Header />
-          <Imgcontainer />
+          <Imgcontainer page={page} query={query} per_page={per_page} />
         </div>
       </div>
     </main>

@@ -1,12 +1,29 @@
 import MyForm from "./MyForm";
 import { getData } from "@/actions/action";
 
-export default async function Page() {
-  const { tados, total, total_pages } = await getData("All", 1, 12);
-  //console.log(tados);
+export default async function Imgcontainer({
+  page,
+  per_page,
+  query,
+}: {
+  page: number;
+  query: string;
+  per_page: number;
+}) {
+  const { tados, total_pages } = await getData(
+    query,
+    Number(page),
+    Number(per_page)
+  );
+
   return (
-    <div className="flex-1 border border-green-500 w-full  py-4 mb-4">
-      <MyForm mydata={tados} total={total} total_pages={total_pages} />
+    <div className="flex-1  w-full h-full  py-4 mb-4 ">
+      <MyForm
+        mydata={tados}
+        total_pages={total_pages}
+        page={page}
+        per_page={per_page}
+      />
     </div>
   );
 }

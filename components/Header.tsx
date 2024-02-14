@@ -1,11 +1,12 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 function Header() {
   return (
     <header className="border-b w-full flex justify-between items-center h-[90px]">
-      <span className="uppercase text-lg font-medium text-white">
+      <Link href={"/"} className="uppercase text-lg font-medium text-white">
         Photography Portfolio
-      </span>
+      </Link>
       <Button variant={"ghost"} className=" text-white">
         Get in touch &rarr;
       </Button>

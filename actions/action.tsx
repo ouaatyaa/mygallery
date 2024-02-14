@@ -4,7 +4,7 @@ import env from "@/lib/env";
 const API_KEY = env.API_ACCESSKEY;
 
 export async function getData(search: string, page: number, per_page: number) {
-  const searchValue = search || "All";
+  const searchValue = search || "";
   const Npage = page || 1;
   const Nper_page = per_page || 10;
   const res = await fetch(
