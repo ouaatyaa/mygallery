@@ -8,6 +8,7 @@ import { getData } from "@/actions/action";
 import { useRouter } from "next/navigation";
 import Gallery from "./Gallery";
 import Link from "next/link";
+import { Search } from "lucide-react";
 
 function MyForm({
   page,
@@ -44,20 +45,24 @@ function MyForm({
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="flex flex-row gap-2 px-10 mb-4">
+      <form
+        onSubmit={handleSubmit}
+        className="flex justify-end items-center gap-2  px-1 md:px-10 mb-4"
+      >
         <Input
           name="search"
+          className=" max-w-56"
           type="text"
           value={mysearch}
           onChange={(e) => setMysearch(e.target.value)}
           placeholder="Enter you Search ...."
         />
-        <Button>Search</Button>
+        <Button>
+          <Search />
+        </Button>
       </form>
       <Gallery listes={listes} />
-
       {/*  Pagination ( if total pages = 1 hide Pagination) */}
-
       <div className=" w-full flex justify-center items-center gap-2 mt-2">
         {/* //Prev page */}
         {page !== 1 && (
@@ -72,12 +77,10 @@ function MyForm({
           </Link>
         )}
         {/*   // Active page */}
-
         <span className=" text-white font-bold">
           {" "}
           {page}/{totalpg}{" "}
         </span>
-
         {/*    //Next page */}
         {page !== total_pages && (
           <Link

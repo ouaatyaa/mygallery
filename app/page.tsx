@@ -14,7 +14,7 @@ export default async function Home({
 
   return (
     <main className="grid items-center min-h-screen">
-      <div className=" overflow-hidden border-2 border-yellow-300  relative  h-full">
+      <div className=" overflow-hidden relative  h-full">
         <div className=" absolute -z-50  h-full w-full bg-black">
           <Image
             src={bgimg}
