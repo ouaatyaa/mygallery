@@ -7,7 +7,6 @@ import { FormEvent } from "react";
 import { getData } from "@/actions/action";
 import { useRouter } from "next/navigation";
 import Gallery from "./Gallery";
-import Link from "next/link";
 import { Search } from "lucide-react";
 
 function MyForm({
@@ -15,7 +14,9 @@ function MyForm({
   per_page,
   mydata,
   total_pages,
+  query,
 }: {
+  query: string;
   page: number;
   per_page: number;
   mydata: Photo[];
@@ -23,7 +24,7 @@ function MyForm({
 }) {
   const [mysearch, setMysearch] = useState("");
   const [listes, setListes] = useState(mydata);
-  const [queryValue, setQueryValue] = useState("all");
+  const [queryValue, setQueryValue] = useState(query);
   const router = useRouter();
   const [active_page, setActivePage] = useState(1);
   const [totalpg, setTotalpg] = useState(total_pages);
@@ -31,16 +32,12 @@ function MyForm({
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (mysearch === "") return;
-    const { tados, total_pages } = await getData(
-      mysearch,
-      Number(page),
-      Number(per_page)
-    );
+    const { tados, total_pages } = await getData(mysearch, 1, per_page);
     setListes(tados);
     setTotalpg(total_pages);
     setQueryValue(mysearch);
     setMysearch("");
-    router.push("/");
+    router.push(`/?page=1&query=${mysearch}`);
   };
 
   return (
@@ -57,16 +54,20 @@ function MyForm({
           onChange={(e) => setMysearch(e.target.value)}
           placeholder="Enter you Search ...."
         />
-        <Button>
+        <Button type="submit">
           <Search />
         </Button>
       </form>
-      <Gallery listes={listes} />
-      {/*  Pagination ( if total pages = 1 hide Pagination) */}
-      <div className=" w-full flex justify-center items-center gap-2 mt-2">
-        {/* //Prev page */}
+
+      {total_pages === 0 && (
+        <h1 className=" text-3xl font-bold text-white text-center">
+          No Image Found !
+        </h1>
+      )}
+      {total_pages !== 0 && <Gallery listes={listes} />}
+      <div className=" w-full flex justify-center items-center gap-x-4 mt-2">
         {page !== 1 && (
-          <Link
+          <a
             href={`/?page=${page - 1}&query=${queryValue}`}
             className=" text-white font-bold"
             onClick={() => {
@@ -74,16 +75,16 @@ function MyForm({
             }}
           >
             {"<<"}
-          </Link>
+          </a>
         )}
-        {/*   // Active page */}
+
         <span className=" text-white font-bold">
           {" "}
           {page}/{totalpg}{" "}
         </span>
-        {/*    //Next page */}
-        {page !== total_pages && (
-          <Link
+
+        {page !== total_pages && total_pages !== 0 && (
+          <a
             href={`/?page=${page + 1}&query=${queryValue}`}
             className=" text-white font-bold"
             onClick={() => {
@@ -91,7 +92,7 @@ function MyForm({
             }}
           >
             {">>"}
-          </Link>
+          </a>
         )}
       </div>
     </>

@@ -14,9 +14,13 @@ export async function getData(search: string, page: number, per_page: number) {
     console.error("Failed to......");
   }
 
-  const tados: Photo[] = res.results;
+  let tados: Photo[] = res.results;
   const total: number = res.total;
   const total_pages: number = res.total_pages;
-  console.log(" total - total_pages:", total, total_pages);
+  console.log(" total_pages:", total_pages);
+  if (total_pages === 0) {
+    tados = [];
+  }
+  console.log("dataos Lentgh", tados.length);
   return { tados, total, total_pages };
 }

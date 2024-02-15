@@ -10,12 +10,8 @@ export default async function Imgcontainer({
   query: string;
   per_page: number;
 }) {
-  const { tados, total_pages } = await getData(
-    query,
-    Number(page),
-    Number(per_page)
-  );
-
+  console.log("Imgcontainer .....First Appel .....");
+  const { tados, total_pages } = await getData(query, page, per_page);
   return (
     <div className="flex-1  w-full h-full  py-4 mb-4 ">
       <MyForm
@@ -23,6 +19,7 @@ export default async function Imgcontainer({
         total_pages={total_pages}
         page={page}
         per_page={per_page}
+        query={query}
       />
     </div>
   );
